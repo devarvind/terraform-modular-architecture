@@ -13,6 +13,7 @@ stages:
           inputs:
             provider: 'azurerm'
             command: 'init'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/Environment/dev'
             backendServiceArm: 'nokia'
             backendAzureRmStorageAccountName: 'storagenokia12'
             backendAzureRmContainerName: 'nokia12'
@@ -21,10 +22,12 @@ stages:
           inputs:
             provider: 'azurerm'
             command: 'validate'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/Environment/dev'
         - task: TerraformTask@5
           inputs:
             provider: 'azurerm'
             command: 'plan'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/Environment/dev'
             environmentServiceNameAzureRM: 'nokia'
       
       - job: scaning
@@ -33,7 +36,7 @@ stages:
         - task: tfsec@1
           inputs:
             version: 'v1.26.0'
-            dir: '$(System.DefaultWorkingDirectory)'
+            dir: '$(System.DefaultWorkingDirectory)/Environment/dev'
 
       - job: manualvalidation
         pool: server
@@ -55,6 +58,7 @@ stages:
           inputs:
             provider: 'azurerm'
             command: 'init'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/Environment/dev'
             backendServiceArm: 'nokia'
             backendAzureRmStorageAccountName: 'storagenokia12'
             backendAzureRmContainerName: 'nokia12'
@@ -63,6 +67,7 @@ stages:
           inputs:
             provider: 'azurerm'
             command: 'apply'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/Environment/dev'
             commandOptions: '-auto-approve'
             environmentServiceNameAzureRM: 'nokia'
 
