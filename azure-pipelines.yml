@@ -1,7 +1,7 @@
 trigger:
 - main
 
-pool: nokia
+pool: Default
 
 stages: 
   - stage: terraformdeploy
